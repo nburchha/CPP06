@@ -1,29 +1,29 @@
 #pragma once
 
 #include <iostream>
+#include <string>
+#include <limits>
+#include <cstdlib>
+#include <cmath>
+#include <cctype>
 
-// Type codes
-#define CHAR_TYPE 1
-#define INT_TYPE 2
-#define FLOAT_TYPE 3
-#define DOUBLE_TYPE 4
-#define PSEUDO_LITERAL_TYPE 5
-#define INVALID_TYPE -1 
+class ScalarConverter {
+public:
+	static void convert(const std::string& literal);
 
-class ScalarConverter
-{
-	private:
-		ScalarConverter();
-		ScalarConverter(const ScalarConverter &other);
-		ScalarConverter &operator=(const ScalarConverter &other);
-		~ScalarConverter();
+private:
+	ScalarConverter();
+	~ScalarConverter();
+	ScalarConverter(const ScalarConverter& other);
+	ScalarConverter& operator=(const ScalarConverter& other);
 
-		static int checkType(const std::string str);
+	bool isChar(const std::string& literal) const;
+	bool isInt(const std::string& literal) const;
+	bool isFloat(const std::string& literal) const;
+	bool isDouble(const std::string& literal) const;
 
-		static void displayChar(const std::string str);
-		static void displayInt(const std::string str);
-		static void displayFloat(const std::string str);
-		static void displayDouble(const std::string str);
-	public:
-		static void convert(const std::string &str);
+	void convertToChar(double value) const;
+	void convertToInt(double value) const;
+	void convertToFloat(double value) const;
+	void convertToDouble(double value) const;
 };
