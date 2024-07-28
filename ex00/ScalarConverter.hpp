@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <cctype>
+#include <iomanip>
 
 class ScalarConverter {
 public:
@@ -22,8 +23,8 @@ private:
 	bool isFloat(const std::string& literal) const;
 	bool isDouble(const std::string& literal) const;
 
-	void convertToChar(double value) const;
-	void convertToInt(double value) const;
-	void convertToFloat(double value) const;
-	void convertToDouble(double value) const;
+	void conversionChar(char value) const;
+	void conversionInt(int value) const;
+	void conversionFloat(float value) const;
+	void conversionDouble(double value) const;
 };
