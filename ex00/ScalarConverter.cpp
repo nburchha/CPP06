@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include "util.hpp"
 
 ScalarConverter::ScalarConverter() {}
 
@@ -33,7 +34,6 @@ bool ScalarConverter::isFloat(const std::string& literal) const
 		return true;
 	}
 	char* end;
-	// float value = std::strtof(literal.c_str(), &end);
 	std::strtof(literal.c_str(), &end);
 	return *end == 'f' && *(end + 1) == '\0';
 }
@@ -44,7 +44,6 @@ bool ScalarConverter::isDouble(const std::string& literal) const
 		return true;
 	}
 	char* end;
-	// double value = std::strtod(literal.c_str(), &end);
 	std::strtod(literal.c_str(), &end);
 	return *end == '\0';
 }
@@ -87,7 +86,7 @@ void ScalarConverter::conversionFloat(float value) const
 		std::cout << "char : '" << c << "'" << std::endl;
 	else
 		std::cout << "char : Non displayable" << std::endl;
-	if (str.find(std::to_string(value)) != std::string::npos || value > INT_MAX || value < INT_MIN)
+	if (str.find(toString(value)) != std::string::npos || value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
 		std::cout << "int : impossible" << std::endl;
 	else
 		std::cout << "int : " << i << std::endl;
@@ -106,7 +105,7 @@ void ScalarConverter::conversionDouble(double value) const
 		std::cout << "char : '" << c << "'" << std::endl;
 	else
 		std::cout << "char : Non displayable" << std::endl;
-	if (str.find(std::to_string(value)) != std::string::npos || value > INT_MAX || value < INT_MIN)
+	if (str.find(toString(value)) != std::string::npos || value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
 		std::cout << "int : impossible" << std::endl;
 	else
 		std::cout << "int : " << i << std::endl;
@@ -122,9 +121,9 @@ void ScalarConverter::convert(const std::string& literal)
 	else if (converter.isInt(literal))
 		converter.conversionInt(std::atoi(literal.c_str()));
 	else if (converter.isFloat(literal))
-		converter.conversionFloat(std::strtof(literal.c_str(), nullptr));
+		converter.conversionFloat(std::strtof(literal.c_str(), NULL));
 	else if (converter.isDouble(literal))
-		converter.conversionDouble(std::strtod(literal.c_str(), nullptr));
+		converter.conversionDouble(std::strtod(literal.c_str(), NULL));
 	else
 	{
 		std::cout << "Error: No valid type found" << std::endl;
